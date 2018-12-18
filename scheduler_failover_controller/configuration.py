@@ -1,5 +1,5 @@
 import os
-import ConfigParser
+import configparser
 import socket
 import sys
 import logging
@@ -8,7 +8,7 @@ import logging
 def get_airflow_home_dir():
     return os.environ['AIRFLOW_HOME'] if "AIRFLOW_HOME" in os.environ else os.path.expanduser("~/airflow")
 
-DEFAULT_AIRFLOW_HOME_DIR = get_airflow_home_dir()
+DEFAULT_AIRFLOW_HOME_DIR = "/usr/local/airflow"
 DEFAULT_METADATA_SERVICE_TYPE = "SQLMetadataService"
 DEFAULT_POLL_FREQUENCY = 10
 DEFAULT_LOGGING_LEVEL = "INFO"
@@ -83,7 +83,7 @@ class Configuration:
             print("Cannot find Airflow Configuration file at '" + str(airflow_config_file_path) + "'!!!")
             sys.exit(1)
 
-        self.conf = ConfigParser.RawConfigParser()
+        self.conf = configparser.RawConfigParser()
         self.conf.read(airflow_config_file_path)
 
     @staticmethod
