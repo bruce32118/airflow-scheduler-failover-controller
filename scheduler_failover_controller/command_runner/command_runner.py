@@ -33,7 +33,7 @@ class CommandRunner:
         if base_command.startswith("sudo"):
             command_split = ["ssh", "-tt", host, base_command]
         else:
-            command_split = ["ssh", host, base_command]
+            command_split = ["ssh", "-i", "emr_shared_ssh_key.pem", "ubutu@{}".format(host), "sudo docker exec scheduler_failover {}".format(base_command)]
         return self._run_split_command(
             command_split=command_split
         )
